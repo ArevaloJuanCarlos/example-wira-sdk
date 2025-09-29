@@ -1,6 +1,8 @@
-# wira-sdk
+# example-wira-sdk
 
-Wira self-sovereign identity and smart wallet library for react-native
+Wira self-sovereign identity and smart wallet library for react-native.
+
+Note: this is an development example repository with minimal funcionality
 
 ## Installation
 
@@ -16,17 +18,13 @@ npm install wira-sdk
 ```js
 import { multiply } from 'wira-sdk';
 
-// ...
-
-const result = multiply(3, 7);
+// require Access to Wira data saved
+const granted = await NativeWiraProvider.requestAccessDataPermission();
+// Sign-in using wira
+const userData = signInWithWira('<com.app.name>')
 ```
 
-
-## Contributing
-
-- [Development workflow](CONTRIBUTING.md#development-workflow)
-- [Sending a pull request](CONTRIBUTING.md#sending-a-pull-request)
-- [Code of conduct](CODE_OF_CONDUCT.md)
+Complete login-register example on example/src/App.tsx
 
 ## License
 

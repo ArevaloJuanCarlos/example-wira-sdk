@@ -1,12 +1,45 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'wira-sdk';
+import { View, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Wira from './Wira';
+import LoginScreen from './LoginScreen';
+import RegisterScreen from './RegisterScreen';
+import {
+  createStaticNavigation,
+  useNavigation,
+} from '@react-navigation/native';
 
-const result = multiply(3, 7);
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: {
+      screen: AppContent,
+      options: { title: 'App A' },
+    },
+    Login: {
+      screen: LoginScreen,
+    },
+    Register: {
+      screen: RegisterScreen,
+    },
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
   return (
+    <SafeAreaProvider>
+      <Navigation />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
+  const navigation = useNavigation();
+
+  return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Wira navigation={navigation} />
     </View>
   );
 }
